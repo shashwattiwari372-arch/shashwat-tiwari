@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Shashwat Tiwari | Java Full Stack Developer | NITTTR Bhopal</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous">
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- AOS for Animations -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d6efd; /* Blue */
+            --secondary: #6610f2; /* Purple */
+            --accent: #ffc107; /* Yellow */
+            --dark: #212529; /* Dark Gray */
+            --light: #f8f9fa; /* Light Gray */
+            --text-color: #333; /* Main Text */
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .navbar {
+            background: var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: background 0.3s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(13, 110, 253, 0.9);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent) !important;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 150px 0 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" fill-opacity="1" d="M0,224L48,192C96,160,192,96,288,96C384,96,480,160,576,181.3C672,203,768,181,864,160C960,139,1056,117,1152,133.3C1248,149,1344,203,1392,229.3L1440,256L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>') bottom no-repeat;
+            background-size: cover;
+        }
+        .hero h1 {
+            font-size: calc(2.5rem + 1vw);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .hero .lead {
+            font-size: calc(1rem + 0.5vw);
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+        .profile-img {
+            width: 220px;
+            height: 220px;
+            border: 10px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+        .section-bg-light {
+            background: var(--light);
+        }
+        .section-title {
+            font-weight: 700;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 60px;
+            font-size: calc(1.8rem + 0.5vw);
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 5px;
+            background: var(--accent);
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        .card-header {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 600;
+            padding: 15px 20px;
+            border-bottom: none;
+        }
+        .skill-badge {
+            background: #e7f0ff;
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            margin: 8px 6px;
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(13,110,253,0.1);
+            transition: transform 0.3s ease;
+        }
+        .skill-badge:hover {
+            transform: scale(1.05);
+        }
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 9px;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 60px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border: 5px solid var(--primary);
+            border-radius: 50%;
+            left: -60px;
+            top: 10px;
+        }
+        .timeline-item h4 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .timeline-item .text-muted {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        .timeline-item ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+        .timeline-item ul li::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+        footer {
+            background: var(--dark);
+            color: #adb5bd;
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+        .btn-download {
+            background: var(--accent);
+            color: var(--dark);
+            font-weight: 600;
+            border: none;
+            transition: background 0.3s ease;
+        }
+        .btn-download:hover {
+            background: #e0a800;
+        }
+        .btn-contact {
+            border-color: white;
+            color: white;
+        }
+        .btn-contact:hover {
+            background: white;
+            color: var(--primary);
+        }
+        /* Responsiveness Enhancements */
+        @media (max-width: 992px) {
+            .hero {
+                padding: 120px 0 100px;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .section {
+                padding: 80px 0;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .profile-img {
+                width: 180px;
+                height: 180px;
+            }
+            .timeline-item {
+                padding-left: 30px;
+            }
+            .timeline-item::before {
+                left: -40px;
+            }
+            .timeline::before {
+                left: -1px;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero {
+                padding: 100px 0 80px;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero .lead {
+                font-size: 1rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .card {
+                margin-bottom: 30px;
+            }
+            .skill-badge {
+                font-size: 0.85rem;
+                padding: 8px 16px;
+            }
+        }
+        @media (max-width: 576px) {
+            .hero {
+                padding: 80px 0 60px;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+            .btn-lg {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+            .section {
+                padding: 60px 0;
+            }
+            .timeline-item h4 {
+                font-size: 1.3rem;
+            }
+            .timeline-item ul li {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Shashwat Tiwari</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#introduction">Introduction</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#awards">Awards</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero" data-aos="fade-in">
+        <div class="container">
+            <img src="https://via.placeholder.com/220" alt="Shashwat Tiwari Profile" class="profile-img mb-4" data-aos="zoom-in" data-aos-delay="200">
+            <h1 data-aos="fade-up" data-aos-delay="400">Shashwat Tiwari</h1>
+            <p class="lead" data-aos="fade-up" data-aos-delay="600">Java Full Stack Developer | Specialist in Education & Training Sector Solutions</p>
+            <p data-aos="fade-up" data-aos-delay="800">Experienced in Robust, Scalable Software for Academic & Institutional Workflows</p>
+            <div class="mt-5" data-aos="fade-up" data-aos-delay="1000">
+                <a href="Shashwat Tiwari Detailed CV.pdf" download class="btn btn-download btn-lg me-3">
+                    <i class="fas fa-download me-2"></i> Download CV
+                </a>
+                <a href="#contact" class="btn btn-outline-light btn-contact btn-lg">
+                    <i class="fas fa-envelope me-2"></i> Contact Me
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="introduction" class="section section-bg-light" data-aos="fade-up">
+        <div class="container">
+            <h2 class="section-title text-center">Introduction</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h4 class="mb-4" data-aos="fade-right" data-aos-delay="200">Pivotal Achievements</h4>
+                    <p data-aos="fade-left" data-aos-delay="400">Experienced in developing robust, scalable solutions for the education and training sector, with a proven track record of delivering software that streamlines academic, apprenticeship, and institutional workflows. Skilled in designing and implementing end-to-end software solutions using Java (JSP/Servlet, Spring Boot/Cloud), Angular and NodeJS for modern web applications. Proficient in Agile methodologies, Cloud & DevOps practices (AWS, Git, Jenkins, Linux), and database management systems including MySQL, Oracle, PostgreSQL, and MS SQL.</p>
+                    <p data-aos="fade-right" data-aos-delay="600">Hands-on experience in API development (OpenAPI), user authentication and authorization using LDAP/Active Directory, OAuth 2.0, and SAML(Security Assertion Markup Language), and integration of AI/ML tools such as scikit-learn and OpenAI APIs to support digital learning and automation initiatives. Skilled in generating dynamic reports and certificates using iText, creating adaptive and responsive UI/UX for academic dashboards, and building Excel/CSV-based data upload and processing modules for institutional needs.</p>
+                    <p data-aos="fade-left" data-aos-delay="800">Successfully optimized application performance, enhanced deployment pipelines, and improved system reliability—contributing to faster delivery of academic services, streamlined administration, and measurable impact on student and faculty engagement.</p>
+
+                    <h4 class="mt-5 mb-4" data-aos="fade-right" data-aos-delay="1000">Professional Passion</h4>
+                    <ul class="list-unstyled" data-aos="fade-left" data-aos-delay="1200">
+                        <li><i class="fas fa-check-circle text-primary me-2"></i>Committed to delivering innovative, reliable, and impactful software solutions that empower institutions and learners.</li>
+                        <li><i class="fas fa-check-circle text-primary me-2"></i>Driven to continuously enhance expertise in the Software Development Process (SDP), ensuring alignment with evolving technologies, standards, and compliance requirements.</li>
+                        <li><i class="fas fa-check-circle text-primary me-2"></i>Motivated by dynamic and challenging environments, with a strong focus on problem-solving, innovation, and client-centric results.</li>
+                    </ul>
+
+                    <h4 class="mt-5 mb-4" data-aos="fade-right" data-aos-delay="1400">Proficiency</h4>
+                    <ul class="list-unstyled" data-aos="fade-left" data-aos-delay="1600">
+                        <li><i class="fas fa-check-circle text-primary me-2"></i>Solid expertise in full-stack development, spanning both front-end and back-end technologies.</li>
+                        <li><i class="fas fa-check-circle text-primary me-2"></i>Strong analytical, communication, and problem-solving abilities, enabling effective collaboration with cross-functional teams.</li>
+                        <li><i class="fas fa-check-circle text-primary me-2"></i>Proven track record of ensuring on-time, high-quality project delivery while adhering to best practices, industry standards, and organizational goals.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Experience Section -->
+    <section id="experience" class="section" data-aos="fade-up">
+        <div class="container">
+            <h2 class="section-title text-center">Professional Experience Summary (1.5+ Years)</h2>
+            <div class="timeline" data-aos="fade-right" data-aos-delay="200">
+                <div class="timeline-item" data-aos="zoom-in" data-aos-delay="400">
+                    <h4>Technical Resource Person (Software Developer)</h4>
+                    <p class="text-muted"><i class="fas fa-calendar-alt me-2"></i>06-October-2025 to Present</p>
+                    <ul>
+                        <li>Payment Gateway Integration: Implemented secure API-based payment processing, handling transactions, callbacks, and reconciliation with third-party gateways.</li>
+                        <li>Backend Development: Developed and tested Java microservices to process payment requests, update transaction status, and log payment history.</li>
+                        <li>Database Management: Designed and optimized MySQL tables for payment transactions, ensuring ACID compliance and data consistency.</li>
+                        <li>Testing & Debugging: Conducted unit, integration, and end-to-end testing for payment flows; identified and resolved API errors and transaction failures.</li>
+                        <li>Security Implementation: Integrated SSL/HTTPS, encrypted sensitive data, and applied secure coding practices to protect financial data.</li>
+                        <li>Documentation & Reporting: Prepared technical documentation and logs for payment workflows, error handling, and testing results.</li>
+                    </ul>
+                </div>
+                <div class="timeline-item" data-aos="zoom-in" data-aos-delay="600">
+                    <h4>Government Apprenticeship</h4>
+                    <p class="text-muted"><i class="fas fa-calendar-alt me-2"></i>03-October-2024 to 04-October-2025</p>
+                    <ul>
+                        <li>Frontend Development: Designed responsive dashboards and UI components using HTML, CSS, and Angular (v20), creating adaptive layouts for multiple devices.</li>
+                        <li>Backend Development: Developed Java microservices with Spring Boot 3.3, integrated with Node.js middleware, ensuring secure API communication.</li>
+                        <li>Database Management: Managed and optimized MySQL databases, applied normalization, indexing, and transaction handling to maintain high data integrity.</li>
+                        <li>Deployment & DevOps: Automated build and deployment cycles on AWS using CI/CD pipelines, with version control on GitHub/GitLab.</li>
+                        <li>Data Analysis & Visualization: Built reporting modules and dashboards for real-time monitoring of user activity and system data.</li>
+                        <li>Security & Performance Optimization: Applied JWT authentication, role-based access control, HTTPS, and OWASP best practices. Optimized throughput using caching and asynchronous processing.</li>
+                        <li>Troubleshooting & Debugging: Performed unit, integration, and system testing; implemented logging with SLF4J/Logback to ensure minimal downtime.</li>
+                    </ul>
+                </div>
+                <div class="timeline-item" data-aos="zoom-in" data-aos-delay="800">
+                    <h4>Software Developer Intern</h4>
+                    <p class="text-muted"><i class="fas fa-calendar-alt me-2"></i>09-October-2023 to 05-April-2024</p>
+                    <ul>
+                        <li>Frontend Development – Designed and developed responsive, cross-browser compatible UI using HTML, CSS, JavaScript, Bootstrap, and Angular, following W3C standards.</li>
+                        <li>Backend Development – Built and maintained server-side applications with Java (Spring Boot, Jakarta EE), implementing RESTful APIs and Microservices to handle complex business logic.</li>
+                        <li>Database Management – Designed schemas, queries, stored procedures, and functions in MySQL, PostgreSQL, MS SQL, and Oracle. Integrated using JDBC and JPA/Hibernate.</li>
+                        <li>Deployment – Managed deployments on AWS Cloud and Apache Tomcat.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Software Projects Section -->
+    <section id="projects" class="section section-bg-light" data-aos="fade-up">
+        <div class="container">
+            <h2 class="section-title text-center">Software Projects (Highlights)</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="200">
+                    <div class="card h-100">
+                        <div class="card-header">M.Tech (PG) Admission Portal</div>
+                        <div class="card-body">
+                            <p><strong>Role:</strong> Java Full Stack Developer</p>
+                            <p><strong>Team Size:</strong> 2</p>
+                            <p><strong>Duration:</strong> October - 2025 to January - 2025</p>
+                            <p><strong>OS:</strong> Windows 11 Pro</p>
+                            <p><strong>Technologies:</strong> JSP, Servlet, MySQL, Tomcat Server, Micro Services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="400">
+                    <div class="card h-100">
+                        <div class="card-header">E-Prashikshan 2.0 (Learning Management System)</div>
+                        <div class="card-body">
+                            <p><strong>Role:</strong> Java Full Stack Developer</p>
+                            <p><strong>Team Size:</strong> 5</p>
+                            <p><strong>Duration:</strong> December - 2025 to Present</p>
+                            <p><strong>OS:</strong> Windows 11 Pro</p>
+                            <p><strong>Technologies:</strong> Angular 20, React, Node JS, Express, MongoDB, Micro Services, AWS</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="600">
+                    <div class="card h-100">
+                        <div class="card-header">E-Prashikshan 2.0 (LMS) Mobile Application</div>
+                        <div class="card-body">
+                            <p><strong>Role:</strong> Java Full Stack Developer</p>
+                            <p><strong>Team Size:</strong> 5</p>
+                            <p><strong>Duration:</strong> December - 2025 to Present</p>
+                            <p><strong>OS:</strong> Windows 11 Pro</p>
+                            <p><strong>Technologies:</strong> Android Studio, Flutter, MySQL, Microservices, Playstore</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="800">
+                    <div class="card h-100">
+                        <div class="card-header">POC Payment Gateway Integration(NTT Data) and Testing</div>
+                        <div class="card-body">
+                            <p><strong>Role:</strong> Java Full Stack Developer</p>
+                            <p><strong>Team Size:</strong> 2</p>
+                            <p><strong>Duration:</strong> November - 2025 to Present</p>
+                            <p><strong>OS:</strong> Windows 11 Pro</p>
+                            <p><strong>Technologies:</strong> JSP, Servlet, MySQL, Tomcat Server, Micro Services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="1000">
+                    <div class="card h-100">
+                        <div class="card-header">(UMS)User Management System</div>
+                        <div class="card-body">
+                            <p><strong>Role:</strong> Java Full Stack Developer</p>
+                            <p><strong>Team Size:</strong> 1</p>
+                            <p><strong>Duration:</strong> December - 2025 to March - 2025</p>
+                            <p><strong>OS:</strong> Windows 11 Pro</p>
+                            <p><strong>Technologies:</strong> Angular-20, NodeJS 20, Spring Boot 3.3, Hibernate, MySQL, Micro Services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="1200">
+                    <div class="card h-100">
+                        <div class="card-header">NITTTR Hostel Booking Portal</div>
+                        <div class="card-body">
+                            <p><strong>Role:</strong> Java Full Stack Developer</p>
+                            <p><strong>Team Size:</strong> 5</p>
+                            <p><strong>Duration:</strong> November - 2025 to June - 2025</p>
+                            <p><strong>OS:</strong> Windows 11 Pro</p>
+                            <p><strong>Technologies:</strong> JSP, Servlet, MySQL, Tomcat Server, Micro Services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="1400">
+                    <div class="card h-100">
+                        <div class="card-header">Apprentice Certificate Generation Portal</div>
+                        <div class="card-body">
+                            <p><strong>Role:</strong> Java Full Stack Developer</p>
+                            <p><strong>Team Size:</strong> 2</p>
+                            <p><strong>Duration:</strong> October-2025 to May 2025</p>
+                            <p><strong>OS:</strong> Windows 11 Pro</p>
+                            <p><strong>Technologies:</strong> JSP, Servlet, MySQL, Tomcat Server, Micro Services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="1600">
+                    <div class="card h-100">
+                        <div class="card-header">Chat bot AI Assistance</div>
+                        <div class="card-body">
+                            <p><strong>Role:</strong> Java Full Stack Developer</p>
+                            <p><strong>Team Size:</strong> 2</p>
+                            <p><strong>Duration:</strong> August-2025 to September - 2025</p>
+                            <p><strong>OS:</strong> Windows 11 Pro</p>
+                            <p><strong>Technologies:</strong> JSP, Servlet, MySQL, Tomcat Server, Micro Services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="1800">
+                    <div class="card h-100">
+                        <div class="card-header">NITTTR POC Calendar Module</div>
+                        <div class="card-body">
+                            <p><strong>Role:</strong> Java Full Stack Developer (Intern)</p>
+                            <p><strong>Team Size:</strong> 1</p>
+                            <p><strong>Duration:</strong> October - 2025 to December - 2025</p>
+                            <p><strong>OS:</strong> Windows 11 Pro</p>
+                            <p><strong>Technologies:</strong> JSP, Servlet, MySQL, Tomcat Server, Micro Services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="2000">
+                    <div class="card h-100">
+                        <div class="card-header">Monthly and Yearly Report Submission Module</div>
+                        <div class="card-body">
+                            <p><strong>Role:</strong> Java Full Stack Developer (Intern)</p>
+                            <p><strong>Team Size:</strong> 4</p>
+                            <p><strong>Duration:</strong> June 2023 – November 2024</p>
+                            <p><strong>Technologies:</strong> JSP, Servlet, MySQL, Tomcat Server, Micro Services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="2200">
+                    <div class="card h-100">
+                        <div class="card-header">POC (Program Organization Cell) Certificate Generation</div>
+                        <div class="card-body">
+                            <p><strong>Role:</strong> Java Full Stack Developer (Intern)</p>
+                            <p><strong>Team Size:</strong> 2</p>
+                            <p><strong>Duration:</strong> March 2023 – June 2023</p>
+                            <p><strong>Technologies:</strong> JSP, Servlet, MySQL, Tomcat Server, Micro Services</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills Section -->
+    <section id="skills" class="section" data-aos="fade-up">
+        <div class="container">
+            <h2 class="section-title text-center">Technical Skills & Tools</h2>
+            <div class="text-center d-flex flex-wrap justify-content-center" data-aos="zoom-in" data-aos-delay="200">
+                <span class="skill-badge">Programming Languages: JAVA</span>
+                <span class="skill-badge">RDBMS: MySQL Server 8.0, MS SQL-Server 2012, Oracle 10, PostgreSQL</span>
+                <span class="skill-badge">Active Directory: Windows Active Directory (LDAP)</span>
+                <span class="skill-badge">Frontend Technology & Framework: Angular(18,19,20), HTML, XML, JavaScript, JSP, Servlet, JSON, CSS</span>
+                <span class="skill-badge">Backend Technology & Framework: Hibernate 4.4, Spring Boot, Security, JPA, JDBC, NODE JS</span>
+                <span class="skill-badge">Web Service: Restful Service, Micro Services</span>
+                <span class="skill-badge">Web Server: Apache Tomcat (9,10), JBOSS EAP (6, 7)</span>
+                <span class="skill-badge">Version Control: GIT, JIRA</span>
+                <span class="skill-badge">Cloud: AWS (EC2, S3, Lambda)</span>
+                <span class="skill-badge">Methodologies: Agile (Scrum), TDD, CI/CD</span>
+                <span class="skill-badge">Area of Interest/Learning: Generative AI, Docker, Kubernetes</span>
+                <span class="skill-badge">Soft Skills: Problem Solving, Curiosity, Team Player, Adaptability</span>
+                <span class="skill-badge">IDE Tools: Eclipse, Visual Studio Code, Android Studio, Arduino Uno, Apache Netbeans, Flutter</span>
+                <span class="skill-badge">Operating Systems: Linux(Ubuntu 16, Fedora 9), Windows OS</span>
+                <span class="skill-badge">DevOps Tools: Jenkins, Git, Maven, Gradle</span>
+                <span class="skill-badge">Testing /Other Tools: JUnit, Postman, Maven</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Educational Qualification Section -->
+    <section id="education" class="section section-bg-light" data-aos="fade-up">
+        <div class="container">
+            <h2 class="section-title text-center">Educational Qualification</h2>
+            <div class="row justify-content-center g-4">
+                <div class="col-lg-8 col-md-10" data-aos="flip-up" data-aos-delay="200">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">BACHELORS OF TECHNOLOGY [B.Tech] IN COMPUTER SCIENCE ENGINEERING (C.S.E)</h5>
+                            <p><strong>Duration:</strong> 2020 – 2024</p>
+                            <p><strong>College:</strong> Bansal College of Engineering, Bhopal</p>
+                            <p><strong>University:</strong> Rajiv Gandhi Proudyogiki Vishwavidyalaya, Bhopal</p>
+                            <p><strong>Marks:</strong> 74.2 %</p>
+                        </div>
+                    </div>
+                </div>
+               <!--  <div class="col-lg-8 col-md-10" data-aos="flip-up" data-aos-delay="400">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">HIGHER SENIOR SECONDARY SCHOOL, CERTIFICATE EXAMINATION, XII STANDARD</h5>
+                            <p><strong>Year:</strong> 2019</p>
+                            <p><strong>School:</strong> C.L.Arya Science Hr. Sec. School</p>
+                            <p><strong>Board:</strong> MP Board</p>
+                            <p><strong>Marks:</strong> 56%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-10" data-aos="flip-up" data-aos-delay="600">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">SECONDARY SCHOOL EXAMINATION, X STANDARD</h5>
+                            <p><strong>Year:</strong> 2018</p>
+                            <p><strong>School:</strong> C.L.Arya Science Hr. Sec. School</p>
+                            <p><strong>Board:</strong> MP Board</p>
+                            <p><strong>Marks:</strong> 55%</p>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" class="section" data-aos="fade-up">
+        <div class="container">
+            <h2 class="section-title text-center">Awards / Achievements / Certificates</h2>
+            <ul class="list-unstyled mb-5" data-aos="fade-right" data-aos-delay="200">
+                <li><i class="fas fa-trophy text-warning me-3"></i>Government Apprenticeship Certification with ABC Creditization</li>
+                <li><i class="fas fa-trophy text-warning me-3"></i>IOT (Internet of Things) Application Development</li>
+                <li><i class="fas fa-trophy text-warning me-3"></i>Web Application Development</li>
+                <li><i class="fas fa-trophy text-warning me-3"></i>Java Full Stack Web Development using Java Technologies and MySql</li>
+                <li><i class="fas fa-trophy text-warning me-3"></i>Rajbhasha Samvad Participation Certificate</li>
+                <li><i class="fas fa-trophy text-warning me-3"></i>Core Java Certification</li>
+            </ul>
+            <h4 class="mb-4" data-aos="fade-left" data-aos-delay="400">Seminar & Workshops</h4>
+            <ul class="list-unstyled" data-aos="fade-right" data-aos-delay="600">
+                <li><i class="fas fa-chalkboard-teacher text-primary me-3"></i>Raj Bhasha Samvad 2025<br>Location: National Institute of Technical Teacher Training and Research (NITTTR), Bhopal<br>Organized by: NITTTR, Bhopal<br>Date: Aug 21, 2025</li>
+                <li><i class="fas fa-chalkboard-teacher text-primary me-3"></i>Cyber Security Awareness<br>Location: National Institute of Technical Teacher Training and Research (NITTTR), Bhopal<br>Organized by: Cyber Cell, Bhopal<br>Date: December 17, 2024</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section section-bg-light" data-aos="fade-up">
+        <div class="container text-center">
+            <h2 class="section-title">Personal Information & Contact</h2>
+            <div class="row g-4 justify-content-center" data-aos="zoom-in" data-aos-delay="200">
+                <div class="col-md-4">
+                    <i class="fas fa-phone fa-3x text-primary mb-3"></i>
+                    <h5>Contact No: +91 9669706648</h5>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-envelope fa-3x text-primary mb-3"></i>
+                    <h5>E-Mail: shashwattiwari372@gmail.com</h5>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-map-marker-alt fa-3x text-primary mb-3"></i>
+                    <h5>Current Address: NITTTR Campus in front of Science Center, Bhopal</h5>
+                </div>
+            </div>
+            <div class="mt-5" data-aos="fade-up" data-aos-delay="400">
+                <p><strong>Nationality:</strong> Indian</p>
+                <p><strong>Hobby:</strong> Reading Books, Meditation</p>
+                <p><strong>Strength:</strong> Adaptability, Grasping Power and Result Orientation</p>
+                <p><strong>Language known:</strong> Hindi/English</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer data-aos="fade-up">
+        <div class="container">
+            <p>© 2026 Shashwat Tiwari. All rights reserved.</p>
+            <p>Declaration: I hereby declare that all the information is true to the best of my knowledge.</p>
+            <p>Place: Bhopal</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+        // Active nav link
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
